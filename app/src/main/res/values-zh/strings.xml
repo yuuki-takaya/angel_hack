@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RoboHon</string>
+    <string name="hello">Hello RoBoHoN!!</string>
+    <string name="accost">发言</string>
+</resources>

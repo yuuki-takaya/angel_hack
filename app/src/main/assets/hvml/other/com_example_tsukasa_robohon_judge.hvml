@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<hvml version="2.0">
+    <head>
+        <producer>com.example.tsukasa.robohon</producer>
+        <!-- TODO このシナリオの説明文を入力してください(プログラムに影響はありません) -->
+        <description>テンプレートシナリオ</description>
+        <!-- HVMLを実行するためのキーワード -->
+        <scene value="com.example.tsukasa.robohon.judgeMode"/>
+        <version value="1.0"/>
+        <!-- <situation priority="75" topic_id="reply" trigger="user-word">${Lvcsr:Basic} include [おはよう,こんにちは,こんばんは]</situation> -->
+        <accost priority="75" topic_id="question" word="com.example.tsukasa.robohon.judge.question"/>
+    </head>
+    <body>
+        <topic dict="Reply" id="question" listen="true">
+            <action index="1">
+                <speech>眠たそうだね</speech>
+                <behavior id="assign" type="normal" />
+            </action>
+            <a href="#Yes">
+                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_YES} neq null</situation>
+            </a>
+            <a href="#No">
+                <situation trigger="user-word">${Local_Reply:GLOBAL_REPLY_NO} neq null</situation>
+            </a>
+
+            <a href="#Fault" type="default"/>
+            <next href="#Fault" type="default"/>
+
+        </topic>
+        <topic id="Yes" listen="false">
+            <action index="1">
+                <speech>さっさと起きろ!!</speech>
+                <behavior id="assign" type="normal" />
+            </action>
+        </topic>
+        <topic id="No" listen="false">
+            <action index="1">
+                <speech>頑張って運転しろよ!</speech>
+                <behavior id="assign" type="normal" />
+            </action>
+        </topic>
+
+        <topic id="Fault" listen="false">
+            <action>
+                <speech>はいかいいえで答えろよ</speech>
+                <behavior id="assign" type="normal" />
+            </action>
+            <next href="question" type="default"/>
+        </topic>
+    </body>
+</hvml>

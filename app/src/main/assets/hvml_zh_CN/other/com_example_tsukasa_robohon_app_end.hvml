@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<hvml version="2.0">
+  <head>
+    <producer>com.example.tsukasa.robohon</producer>
+    <description>アプリを終了するためのシナリオ(中国語)</description>
+    <scene value="com.example.tsukasa.robohon.scene_common"/>
+    <version value="1.0"/>
+    <situation priority="61" topic_id="accept" trigger="user-word">应用 in ${Lvcsr:Basic} and ${Lvcsr:Basic} include [结束,完,放弃]</situation>
+    <accost priority="74" topic_id="execute" word="com.example.tsukasa.robohon.app_end.execute"/>
+  </head>
+  <body>
+    <topic id="accept" listen="false">
+      <action index="1">
+        <speech>${resolver:speech_ok(${resolver:ok_id})}</speech>
+        <behavior id="${resolver:motion_ok(${resolver:ok_id})}" type="normal"/>
+      </action>
+      <next href="#execute" type="default"/>
+    </topic>
+    <topic id="execute" listen="false">
+      <action index="1">
+        <speech>应用结束</speech>
+        <behavior id="assign" type="normal"/>
+        <control function="end_app" target="com.example.tsukasa.robohon"/>
+      </action>
+    </topic>
+  </body>
+</hvml>
